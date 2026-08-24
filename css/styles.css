@@ -1,0 +1,308 @@
+/* styles.css — Fase 0.
+   Unidades relativas (rem) para respetar el tamaño de texto del sistema
+   (equivalente web a Dynamic Type, ver apartado 12.3 / adenda v1.4). */
+
+:root {
+  --azul: #2f6690;
+  --azul-oscuro: #1c4160;
+  --acento: #ffd166;
+  --fondo: #f6f8fa;
+  --texto: #1b1f23;
+  --texto-suave: #4b5563;
+  --borde: #d7dee6;
+  --error: #b3261e;
+  --ok: #1f7a4d;
+  --radio: 0.9rem;
+  --espacio: 1rem;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 100%; } /* hereda el tamaño de texto del sistema/navegador */
+
+body {
+  margin: 0;
+  font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.5;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+#app {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: var(--espacio);
+  padding-bottom: 6rem;
+}
+
+h1, h2, h3 { color: var(--azul-oscuro); line-height: 1.25; }
+h1 { font-size: 1.7rem; margin: 0 0 0.25rem; }
+h2 { font-size: 1.3rem; }
+p { margin: 0.5rem 0; }
+.subtitulo { color: var(--texto-suave); margin-top: 0; }
+
+.pantalla { display: flex; flex-direction: column; gap: 1rem; }
+
+.tarjeta {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1.25rem;
+}
+
+label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1.5px solid var(--borde);
+  background: #fff;
+  color: var(--texto);
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 2px;
+}
+
+.campo { margin-bottom: 0.9rem; }
+.ayuda-campo { font-weight: 400; color: var(--texto-suave); font-size: 0.9rem; margin-top: 0.25rem; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0.7rem;
+  border: none;
+  padding: 0.75rem 1.1rem;
+  font-weight: 600;
+}
+
+.btn-primario {
+  background: var(--azul);
+  color: #fff;
+}
+.btn-primario:hover { background: var(--azul-oscuro); }
+
+.btn-secundario {
+  background: #fff;
+  color: var(--azul-oscuro);
+  border: 1.5px solid var(--azul);
+}
+
+.btn-texto {
+  background: transparent;
+  color: var(--azul-oscuro);
+  text-decoration: underline;
+  padding: 0.4rem;
+}
+
+.fila-botones { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+.error {
+  color: var(--error);
+  font-weight: 600;
+  margin-top: 0.4rem;
+}
+
+.aviso {
+  background: #fff7e6;
+  border: 1px solid var(--acento);
+  border-radius: var(--radio);
+  padding: 0.9rem 1rem;
+  font-size: 0.95rem;
+}
+
+/* Selector de perfiles */
+.rejilla-perfiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 0.9rem;
+}
+
+.perfil-boton {
+  background: #fff;
+  border: 2px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+.perfil-boton:hover { border-color: var(--azul); }
+
+.avatar {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.perfil-boton.anadir {
+  border-style: dashed;
+  color: var(--texto-suave);
+}
+
+/* Navegación principal por pestañas (Fase 0: sin contenido todavía) */
+.tabs-nav {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: #fff;
+  border-top: 1px solid var(--borde);
+  display: flex;
+  justify-content: space-around;
+  padding: 0.4rem 0.2rem calc(0.4rem + env(safe-area-inset-bottom));
+}
+
+.tab-btn {
+  background: transparent;
+  color: var(--texto-suave);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.3rem;
+  border-radius: 0.6rem;
+  flex: 1;
+}
+.tab-btn .icono { font-size: 1.25rem; }
+.tab-btn[aria-current="page"] { color: var(--azul); background: #eaf1f7; }
+
+.pantalla-vacia {
+  text-align: center;
+  color: var(--texto-suave);
+  padding: 3rem 1rem;
+}
+
+.cabecera-app {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.pastilla {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #eaf1f7;
+  color: var(--azul-oscuro);
+}
+
+.pastilla.verificado { background: #e6f4ec; color: var(--ok); }
+.pastilla.pendiente { background: #fdeee9; color: #9a4a12; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+#lista-mensajes::-webkit-scrollbar { width: 0.4rem; }
+#lista-mensajes::-webkit-scrollbar-thumb { background: var(--borde); border-radius: 999px; }
+
+footer.creditos {
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --fondo: #14181d;
+    --texto: #eef1f4;
+    --texto-suave: #a7b0ba;
+    --borde: #2b323b;
+  }
+  .tarjeta, .perfil-boton, .tabs-nav, input, select { background: #1b2128; color: var(--texto); }
+  .tab-btn[aria-current="page"] { background: #1e2733; }
+  .pastilla { background: #1e2733; }
+}
+
+/* ---------- Accesibilidad ampliada (Fase 5, apartado 9.1) ---------- */
+/* Ajustes reales aplicados en toda la app vía atributos en <html>, elegidos
+   por el alumno o la Familia desde el botón ⚙️ de la cabecera. */
+
+html[data-tamano-letra="grande"] { font-size: 118%; }
+html[data-tamano-letra="muy_grande"] { font-size: 135%; }
+
+html[data-espaciado="amplio"] body { line-height: 1.9; }
+html[data-espaciado="amplio"] p { margin: 0.85rem 0; }
+html[data-espaciado="amplio"] .campo { margin-bottom: 1.3rem; }
+
+/* Tema oscuro manual: mismas variables que el automático por preferencia del
+   sistema, pero activable a propósito (no todo el mundo con dificultad de
+   lectura tiene el sistema entero en modo oscuro). */
+html[data-tema="oscuro"] {
+  color-scheme: dark;
+  --fondo: #14181d;
+  --texto: #eef1f4;
+  --texto-suave: #a7b0ba;
+  --borde: #2b323b;
+}
+html[data-tema="oscuro"] .tarjeta,
+html[data-tema="oscuro"] .perfil-boton,
+html[data-tema="oscuro"] .tabs-nav,
+html[data-tema="oscuro"] input,
+html[data-tema="oscuro"] select { background: #1b2128; color: var(--texto); }
+html[data-tema="oscuro"] .tab-btn[aria-current="page"] { background: #1e2733; }
+html[data-tema="oscuro"] .pastilla { background: #1e2733; }
+
+/* Alto contraste: negro sobre blanco puro, bordes más gruesos, sin depender
+   solo del color para distinguir estados (riesgo de accesibilidad, apartado 12). */
+html[data-tema="alto_contraste"] {
+  color-scheme: light;
+  --fondo: #ffffff;
+  --texto: #000000;
+  --texto-suave: #000000;
+  --borde: #000000;
+  --azul: #002d72;
+  --azul-oscuro: #001a42;
+  --ok: #0a5c2b;
+  --error: #8a0000;
+}
+html[data-tema="alto_contraste"] .tarjeta,
+html[data-tema="alto_contraste"] .perfil-boton,
+html[data-tema="alto_contraste"] input,
+html[data-tema="alto_contraste"] select,
+html[data-tema="alto_contraste"] button { border-width: 2px; }
+html[data-tema="alto_contraste"] .pastilla { border: 2px solid currentColor; }
+
+/* Menos estímulos (atención): sin animaciones ni transiciones en ningún sitio. */
+html[data-menos-estimulos="true"] *,
+html[data-menos-estimulos="true"] *::before,
+html[data-menos-estimulos="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Voz por defecto (escritura): destaca el botón de dictado ya existente desde la Fase 1. */
+html[data-voz-por-defecto="true"] #btn-dictado {
+  background: var(--acento);
+  color: var(--azul-oscuro);
+  border: none;
+}

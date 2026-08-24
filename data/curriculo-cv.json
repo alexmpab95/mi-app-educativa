@@ -1,0 +1,80 @@
+{
+  "version": "0.1.0-fase0-semilla",
+  "comunidadAutonoma": "Comunitat Valenciana",
+  "notaAlcance": "Semilla inicial de la Fase 0 (apartado 17 del documento de arquitectura). Solo contiene un paquete curricular verificado como ejemplo del formato; el resto de materias y cursos existen como estructura (para poder crear perfiles y elegir curso/materia) pero SIN contenido curricular todavía. La app nunca debe mostrar contenido sin verificar como si fuera oficial: cuando no exista un paquete curricular para una materia, la interfaz debe decirlo explícitamente en vez de inventar texto. La ingesta completa del currículo estatal y del desarrollo autonómico de la Comunitat Valenciana (Decreto 106/2022 en Primaria, Decreto 107/2022 en ESO) es trabajo posterior a esta Fase 0, conforme al apartado 6 y 7 del documento.",
+  "etapas": [
+    {
+      "id": "primaria",
+      "nombre": "Educación Primaria",
+      "cursos": [
+        { "id": "primaria-1", "nombre": "1º de Primaria", "ciclo": "primer ciclo" },
+        { "id": "primaria-2", "nombre": "2º de Primaria", "ciclo": "primer ciclo" },
+        { "id": "primaria-3", "nombre": "3º de Primaria", "ciclo": "segundo ciclo" },
+        { "id": "primaria-4", "nombre": "4º de Primaria", "ciclo": "segundo ciclo" },
+        { "id": "primaria-5", "nombre": "5º de Primaria", "ciclo": "tercer ciclo" },
+        { "id": "primaria-6", "nombre": "6º de Primaria", "ciclo": "tercer ciclo" }
+      ],
+      "materias": [
+        { "id": "mat-primaria", "nombre": "Matemáticas" },
+        { "id": "lengua-primaria", "nombre": "Lengua Castellana y Literatura" },
+        { "id": "valenciano-primaria", "nombre": "Valencià: Llengua i Literatura" },
+        { "id": "ccnn-primaria", "nombre": "Ciencias de la Naturaleza" },
+        { "id": "ccss-primaria", "nombre": "Ciencias Sociales" },
+        { "id": "ingles-primaria", "nombre": "Primera Lengua Extranjera (Inglés)" },
+        { "id": "ef-primaria", "nombre": "Educación Física" },
+        { "id": "plastica-primaria", "nombre": "Educación Plástica y Visual" },
+        { "id": "musica-primaria", "nombre": "Educación Musical" },
+        { "id": "valores-primaria", "nombre": "Educación en Valores Cívicos y Éticos" }
+      ]
+    },
+    {
+      "id": "eso",
+      "nombre": "Educación Secundaria Obligatoria (ESO)",
+      "cursos": [
+        { "id": "eso-1", "nombre": "1º de ESO", "ciclo": "primer ciclo" },
+        { "id": "eso-2", "nombre": "2º de ESO", "ciclo": "primer ciclo" },
+        { "id": "eso-3", "nombre": "3º de ESO", "ciclo": "segundo ciclo" },
+        { "id": "eso-4", "nombre": "4º de ESO", "ciclo": "segundo ciclo" }
+      ],
+      "materias": [
+        { "id": "mat-eso", "nombre": "Matemáticas" },
+        { "id": "lengua-eso", "nombre": "Lengua Castellana y Literatura" },
+        { "id": "valenciano-eso", "nombre": "Valencià: Llengua i Literatura" },
+        { "id": "biogeo-eso", "nombre": "Biología y Geología" },
+        { "id": "fisquim-eso", "nombre": "Física y Química" },
+        { "id": "geohist-eso", "nombre": "Geografía e Historia" },
+        { "id": "ingles-eso", "nombre": "Primera Lengua Extranjera (Inglés)" },
+        { "id": "ef-eso", "nombre": "Educación Física" },
+        { "id": "tecnologia-eso", "nombre": "Tecnología y Digitalización" }
+      ]
+    }
+  ],
+  "paquetesCurriculares": [
+    {
+      "id": "mat-primaria-tercer-ciclo-ce1",
+      "verificado": true,
+      "etapa": "primaria",
+      "cursos": ["primaria-5", "primaria-6"],
+      "materia": "mat-primaria",
+      "fuente": {
+        "norma": "Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la Educación Primaria (BOE-A-2022-3296)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-3296",
+        "ambito": "enseñanzas mínimas estatales, aplicables como base en la Comunitat Valenciana en tanto no se cargue el desarrollo autonómico específico del Decreto 106/2022",
+        "fechaVigencia": "2022-03-02",
+        "fechaConsulta": "2026-08-24"
+      },
+      "competenciaEspecifica": {
+        "numero": 1,
+        "texto": "Interpretar situaciones de la vida cotidiana, proporcionando una representación matemática de las mismas mediante conceptos, herramientas y estrategias, para analizar la información más relevante."
+      },
+      "criteriosEvaluacion": [
+        { "codigo": "1.1", "texto": "Comprender problemas de la vida cotidiana a través de la reformulación de la pregunta, de forma verbal y gráfica." },
+        { "codigo": "1.2", "texto": "Elaborar representaciones matemáticas que ayuden en la búsqueda y elección de estrategias y herramientas, incluidas las tecnológicas, para la resolución de una situación problematizada." }
+      ],
+      "saberesBasicos": {
+        "bloque": "Sentido numérico",
+        "resumen": "Incluye las áreas de conteo, cantidad, sentido de las operaciones, relaciones, razonamiento proporcional y educación financiera; por ejemplo, lectura, representación (incluida la recta numérica y con materiales manipulativos), composición, descomposición y recomposición de números naturales y decimales hasta las milésimas, y la relación entre fracciones sencillas, decimales y porcentajes."
+      }
+    }
+  ]
+}
