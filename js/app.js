@@ -591,7 +591,7 @@ function actualizarBarraProgresoProfesor() {
 async function iniciarConversacion() {
   pintarCargaProfesor();
   try {
-    const { motor, tipo } = await obtenerMotorCompartido((info) => {
+    const { motor, tipo, errorMotorReal } = await obtenerMotorCompartido((info) => {
       if (!estado.profesor) return; // la pantalla pudo cambiar mientras cargaba
       estado.profesor.progreso = info.progreso;
       estado.profesor.textoProgreso = info.texto || "Cargando…";
@@ -599,6 +599,11 @@ async function iniciarConversacion() {
     });
     estado.profesor.motor = motor;
     estado.profesor.tipoMotor = tipo;
+    // Presente solo cuando el navegador anunciaba soporte de WebGPU pero la carga real del
+    // modelo ha fallado (sin red, CDN bloqueado, memoria insuficiente...): el motor de prueba
+    // sigue funcionando con normalidad, pero conviene decir la verdad en vez de fingir que
+    // todo iba bien desde el principio (ver motor-compartido.js).
+    estado.profesor.errorMotorReal = errorMotorReal || null;
     estado.profesor.progreso = 1;
   } catch (err) {
     console.error("No se ha podido inicializar el motor de IA:", err);
@@ -611,6 +616,9 @@ async function iniciarConversacion() {
 function etiquetaMotor() {
   if (estado.profesor.errorMotor) return `<span class="pastilla pendiente">⚠️ Motor no disponible</span>`;
   if (estado.profesor.tipoMotor === "webgpu") return `<span class="pastilla verificado">⚡ Motor real (WebGPU)</span>`;
+  if (estado.profesor.errorMotorReal) {
+    return `<span class="pastilla pendiente" title="${escapeHtml(estado.profesor.errorMotorReal)}">🧪 Motor de prueba (el motor real no se pudo cargar)</span>`;
+  }
   return `<span class="pastilla pendiente">🧪 Motor de prueba (sin IA real)</span>`;
 }
 
@@ -656,6 +664,11 @@ function pintarChatProfesor() {
         </div>
         ${etiquetaMotor()}
       </section>
+      ${
+        estado.profesor.errorMotorReal
+          ? `<p class="ayuda-campo">El motor real (WebGPU) no se ha podido cargar, así que de momento ves respuestas de ejemplo. Motivo técnico: ${escapeHtml(estado.profesor.errorMotorReal)}</p>`
+          : ""
+      }
 
       ${tarjetaVerificada}
 

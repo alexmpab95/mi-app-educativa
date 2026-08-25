@@ -4,7 +4,7 @@
 // revalidate), para que la app funcione sin conexión desde la primera
 // visita (apartado 13.1).
 
-const CACHE_NAME = "educativo-cache-v8";
+const CACHE_NAME = "educativo-cache-v9";
 
 const ARCHIVOS_APP_SHELL = [
   "./",

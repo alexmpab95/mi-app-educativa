@@ -239,13 +239,30 @@ no:
   puede descargar: en ese caso cae automáticamente a un "motor de prueba"
   (respuestas de ejemplo, siempre etiquetadas como tales, nunca haciéndose
   pasar por IA real) en vez de romperse.
+- **Bug real encontrado y corregido tras la primera validación en un iPad
+  real:** el navegador anunciaba soporte de WebGPU (así que la app intentaba
+  cargar el motor real), pero la carga en sí fallaba después — y en ese
+  caso concreto la pantalla se quedaba en "⚠️ Motor no disponible" en vez de
+  caer al motor de prueba, justo lo contrario de lo que promete el punto
+  anterior. Corregido en `js/motor-compartido.js`: ahora, si el motor real
+  anuncia soporte pero su carga falla de verdad, cae automáticamente al
+  motor de prueba (con el mensaje "🧪 Motor de prueba (el motor real no se
+  pudo cargar)" y el motivo técnico visible debajo, en vez de ocultarlo).
+  Cubierto por `test/e2e-fallback-motor.js`, que simula ese fallo exacto
+  (adaptador WebGPU falso + red al CDN bloqueada) y comprueba que el chat
+  sigue siendo utilizable.
 - **La primera vez que abras "Mi profesor" en tu iPad real, con internet,
   verás si el motor real (etiqueta "⚡ Motor real (WebGPU)") carga y si
-  responde con una calidad y una velocidad razonables.** Si en vez de eso
-  ves la etiqueta "🧪 Motor de prueba" o "⚠️ Motor no disponible", algo ha
-  fallado al cargar WebGPU o al descargar el modelo: revisa la consola del
-  navegador (en Safari, actívala desde Ajustes → Safari → Avanzado →
-  Inspector Web) para ver el motivo exacto.
+  responde con una calidad y una velocidad razonables.** Si ves la etiqueta
+  "🧪 Motor de prueba (el motor real no se pudo cargar)", la app ya se ha
+  recuperado sola — el chat sigue funcionando con respuestas de ejemplo —
+  pero conviene mirar el motivo técnico que se muestra justo debajo del
+  aviso (o la consola del navegador: en Safari, actívala desde Ajustes →
+  Safari → Avanzado → Inspector Web) para saber si es falta de conexión,
+  un bloqueo de red, o memoria insuficiente del dispositivo. Si en cambio
+  ves directamente "⚠️ Motor no disponible" (sin haber pasado antes por el
+  motor de prueba), es una situación distinta y más rara — revisa igualmente
+  la consola del navegador para ver el motivo exacto.
 - Si la calidad o la velocidad no son suficientes, el modelo usado se puede
   cambiar en `js/ia-motores.js` (constante `MODELO_WEBLLM`) por otro más
   pequeño (más rápido, menos capaz) o más grande (más lento, más capaz) del
@@ -358,6 +375,7 @@ node test/e2e-fase4.js   # Fase 4: Cuaderno, Escanea y aprende (OCR), pizarra li
 node test/e2e-fase5.js   # Fase 5: criterio de evaluación, modelo educativo, explicabilidad, accesibilidad, sugerencias, Hoy tengo que estudiar
 node test/e2e-fase6.js   # Fase 6: asignación diferenciada entre hermanos, excepciones, informes y adaptaciones desde el Panel de la Familia
 node test/e2e-fase7.js   # Fase 7: puntos, racha amable, nivel, insignias y calendario de actividad
+node test/e2e-fallback-motor.js  # Regresión: caída al motor de prueba cuando el motor real falla tras anunciar soporte
 ```
 
 ## Qué falta antes de seguir (todas las fases del documento están cubiertas)
